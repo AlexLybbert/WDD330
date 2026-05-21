@@ -45,6 +45,15 @@ export function renderWithTemplate(template, parentElement, data, callback) {
   }
 }
 
+export function updateCartCount() {
+  const cart = getLocalStorage('so-cart') || [];
+  const count = Array.isArray(cart) ? cart.length : 0;
+  const badge = qs('.cart-count');
+  if (badge) {
+    badge.textContent = count > 0 ? count : '';
+  }
+}
+
 async function loadTemplate(path) {
   const response = await fetch(path);
   return await response.text();
@@ -57,6 +66,7 @@ export async function loadHeaderFooter() {
   const categories = await loadTemplate('/partials/categories.html');
   renderWithTemplate(header, qs('#header'));
   renderWithTemplate(footer, qs('#footer'));
+  updateCartCount();
   const heroEl = qs('#hero');
   if (heroEl) {
     renderWithTemplate(hero, heroEl);
