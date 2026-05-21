@@ -261,3 +261,36 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* Category list styles */
+.categories {
+  padding: 1rem;
+}
+
+.category-list {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.category-list li {
+  text-align: center;
+  flex: 1 1 20%;
+}
+
+.category-list a {
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+
+.category-list img {
+  max-width: 100px;
+  display: block;
+  margin: 0 auto 0.5em;
+}
+
+.category-list p {
+  font-weight: bold;
+  color: var(--secondary-color);
+}

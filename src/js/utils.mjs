@@ -53,6 +53,16 @@ async function loadTemplate(path) {
 export async function loadHeaderFooter() {
   const header = await loadTemplate('/partials/header.html');
   const footer = await loadTemplate('/partials/footer.html');
+  const hero = await loadTemplate('/partials/hero.html');
+  const categories = await loadTemplate('/partials/categories.html');
   renderWithTemplate(header, qs('#header'));
   renderWithTemplate(footer, qs('#footer'));
+  const heroEl = qs('#hero');
+  if (heroEl) {
+    renderWithTemplate(hero, heroEl);
+  }
+  const categoriesEl = qs('#categories');
+  if (categoriesEl) {
+    renderWithTemplate(categories, categoriesEl);
+  }
 }

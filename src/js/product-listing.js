@@ -15,9 +15,11 @@ const myList = new ProductList(category, dataSource, listElement);
 myList.init();
 
 // Update the page title with the category
-const heading = qs('.products h2');
-const formattedCategory = category
-  .split('-')
-  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-  .join(' ');
-heading.textContent = `Top Products: ${formattedCategory}`;
+if (category) {
+  const heading = qs('.products h2');
+  const formattedCategory = category
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+  heading.textContent = `Top Products: ${formattedCategory}`;
+}
