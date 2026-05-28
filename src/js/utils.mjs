@@ -26,7 +26,33 @@ export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get(param);
-  return product
+  return product;
+}
+
+export function alertMessage(message, scroll = true) {
+  const main = qs('main');
+  const existingAlert = qs('.alert-message');
+  const alert = document.createElement('div');
+  const alertText = document.createElement('p');
+  const closeButton = document.createElement('button');
+
+  if (existingAlert) {
+    existingAlert.remove();
+  }
+
+  alert.classList.add('alert-message');
+  alert.setAttribute('role', 'alert');
+  alertText.textContent = message;
+  closeButton.type = 'button';
+  closeButton.setAttribute('aria-label', 'Close message');
+  closeButton.textContent = 'X';
+  closeButton.addEventListener('click', () => alert.remove());
+  alert.append(alertText, closeButton);
+  main.insertAdjacentElement('afterbegin', alert);
+
+  if (scroll) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
 
 export function renderListWithTemplate(template, parentElement, list, position = 'afterbegin', clear = false) {

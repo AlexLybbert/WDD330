@@ -1,4 +1,4 @@
-import { getLocalStorage, renderListWithTemplate } from './utils.mjs';
+import { getLocalStorage, qs, renderListWithTemplate } from './utils.mjs';
 
 function cartItemTemplate(item) {
   return `<li class="cart-card divider">
@@ -26,9 +26,28 @@ export default class ShoppingCart {
   init() {
     this.cartItems = getLocalStorage('so-cart') || [];
     this.renderList(this.cartItems);
+    this.renderCartFooter();
   }
 
   renderList(list) {
     renderListWithTemplate(cartItemTemplate, this.listElement, list, 'afterbegin', true);
+  }
+
+  renderCartFooter() {
+    const cartFooter = qs('.cart-footer');
+    const cartTotal = qs('#cartTotal');
+
+    if (!cartFooter || !cartTotal) {
+      return;
+    }
+
+    if (this.cartItems.length === 0) {
+      cartFooter.classList.add('hide');
+      return;
+    }
+
+    const total = this.cartItems.reduce((sum, item) => sum + Number(item.FinalPrice), 0);
+    cartTotal.textContent = total.toFixed(2);
+    cartFooter.classList.remove('hide');
   }
 }
